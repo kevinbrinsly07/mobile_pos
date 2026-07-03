@@ -596,7 +596,8 @@ alter table stock_movements enable row level security;
 alter table loyalty_transactions enable row level security;
 alter table audit_log enable row level security;
 
-create policy if not exists org_read on organizations
+drop policy if exists org_read on organizations;
+create policy org_read on organizations
 for select using (
   exists (
     select 1 from profiles p
@@ -604,11 +605,13 @@ for select using (
   )
 );
 
-create policy if not exists stores_rw on stores
+drop policy if exists stores_rw on stores;
+create policy stores_rw on stores
 for all using (can_access_store(id))
 with check (can_access_store(id));
 
-create policy if not exists profiles_rw on profiles
+drop policy if exists profiles_rw on profiles;
+create policy profiles_rw on profiles
 for all using (
   id = auth.uid() or
   (is_admin_like() and organization_id = (select organization_id from current_profile()))
@@ -618,35 +621,43 @@ with check (
   (is_admin_like() and organization_id = (select organization_id from current_profile()))
 );
 
-create policy if not exists categories_rw on categories
+drop policy if exists categories_rw on categories;
+create policy categories_rw on categories
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists products_rw on products
+drop policy if exists products_rw on products;
+create policy products_rw on products
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists po_rw on purchase_orders
+drop policy if exists po_rw on purchase_orders;
+create policy po_rw on purchase_orders
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists customers_rw on customers
+drop policy if exists customers_rw on customers;
+create policy customers_rw on customers
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists discounts_rw on discounts
+drop policy if exists discounts_rw on discounts;
+create policy discounts_rw on discounts
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists shifts_rw on shifts
+drop policy if exists shifts_rw on shifts;
+create policy shifts_rw on shifts
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists sales_rw on sales
+drop policy if exists sales_rw on sales;
+create policy sales_rw on sales
 for all using (can_access_store(store_id))
 with check (can_access_store(store_id));
 
-create policy if not exists sale_items_rw on sale_items
+drop policy if exists sale_items_rw on sale_items;
+create policy sale_items_rw on sale_items
 for all using (
   exists (
     select 1 from sales s where s.id = sale_items.sale_id and can_access_store(s.store_id)
@@ -658,7 +669,8 @@ with check (
   )
 );
 
-create policy if not exists sale_payments_rw on sale_payments
+drop policy if exists sale_payments_rw on sale_payments;
+create policy sale_payments_rw on sale_payments
 for all using (
   exists (
     select 1 from sales s where s.id = sale_payments.sale_id and can_access_store(s.store_id)
@@ -670,7 +682,8 @@ with check (
   )
 );
 
-create policy if not exists stock_movements_read on stock_movements
+drop policy if exists stock_movements_read on stock_movements;
+create policy stock_movements_read on stock_movements
 for select using (
   exists (
     select 1
@@ -680,7 +693,8 @@ for select using (
   )
 );
 
-create policy if not exists audit_log_read on audit_log
+drop policy if exists audit_log_read on audit_log;
+create policy audit_log_read on audit_log
 for select using (is_admin_like());
 
 -- =========================
