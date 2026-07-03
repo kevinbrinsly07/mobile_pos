@@ -591,6 +591,7 @@ alter table shifts enable row level security;
 alter table sales enable row level security;
 alter table sale_items enable row level security;
 alter table sale_payments enable row level security;
+alter table receipt_sequences enable row level security;
 alter table stock_movements enable row level security;
 alter table loyalty_transactions enable row level security;
 alter table audit_log enable row level security;
