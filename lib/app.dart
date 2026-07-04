@@ -16,6 +16,7 @@ import 'screens/shifts_screen.dart';
 import 'screens/shell_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/staff_screen.dart';
+import 'services/supabase_service.dart';
 
 class PosApp extends ConsumerWidget {
   const PosApp({super.key});
@@ -44,10 +45,17 @@ final routerProvider = Provider<GoRouter>((ref) {
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/splash',
     redirect: (context, state) {
+      if (!SupabaseService.isInitialized) {
+        return null;
+      }
+      if (authState.isLoading) {
+        return null;
+      }
+
       final loggedIn = authState.valueOrNull != null;
       final atAuth = state.matchedLocation == '/login' || state.matchedLocation == '/pin-login';
 
-      if (!loggedIn && !atAuth && state.matchedLocation != '/splash') {
+      if (!loggedIn && !atAuth) {
         return '/login';
       }
       if (loggedIn && (atAuth || state.matchedLocation == '/splash')) {

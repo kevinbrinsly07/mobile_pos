@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_config.dart';
+import '../services/supabase_service.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
             const CircularProgressIndicator(),
             const SizedBox(height: 12),
             Text(
-              AppConfig.isConfigured
+              SupabaseService.isInitialized
                   ? 'Connecting to Supabase...'
                   : 'Set SUPABASE_URL and SUPABASE_ANON_KEY using --dart-define.',
               textAlign: TextAlign.center,

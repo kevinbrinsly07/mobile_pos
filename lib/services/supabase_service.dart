@@ -5,13 +5,20 @@ import '../utils/app_config.dart';
 class SupabaseService {
   static bool _initialized = false;
 
-  static Future<void> init() async {
-    if (_initialized || !AppConfig.isConfigured) {
+  static bool get isInitialized => _initialized;
+
+  static Future<void> init({String? url, String? anonKey}) async {
+    if (_initialized) {
+      return;
+    }
+    final targetUrl = url ?? (AppConfig.isConfigured ? AppConfig.supabaseUrl : null);
+    final targetKey = anonKey ?? (AppConfig.isConfigured ? AppConfig.supabaseAnonKey : null);
+    if (targetUrl == null || targetKey == null) {
       return;
     }
     await Supabase.initialize(
-      url: AppConfig.supabaseUrl,
-      publishableKey: AppConfig.supabaseAnonKey,
+      url: targetUrl,
+      publishableKey: targetKey,
     );
     _initialized = true;
   }

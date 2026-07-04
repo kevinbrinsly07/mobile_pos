@@ -377,6 +377,8 @@ drop trigger if exists trg_sales_reverse_stock on sales;
 create trigger trg_sales_reverse_stock
 after update on sales
 for each row execute function reverse_stock_on_refund();
+drop trigger if exists on_auth_user_created on auth.users;
+drop function if exists create_profile_on_signup() cascade;
 
 create or replace function create_profile_on_signup()
 returns trigger
@@ -387,8 +389,25 @@ declare
   first_org_id bigint;
   first_store_id bigint;
 begin
+  -- Try to find the first organization
   select id into first_org_id from organizations order by id limit 1;
+   
+  -- If no organization exists, create a default one
+  if first_org_id is null then
+    insert into organizations (name, timezone, currency, tax_rate_default)
+    values ('Demo Organization', 'UTC', 'USD', 800)
+    returning id into first_org_id;
+  end if;
+
+  -- Try to find the first store for that organization
   select id into first_store_id from stores where organization_id = first_org_id order by id limit 1;
+
+  -- If no store exists, create a default one
+  if first_store_id is null then
+    insert into stores (organization_id, name, address, phone)
+    values (first_org_id, 'Main Store', '123 Demo Street', '+1-555-0100')
+    returning id into first_store_id;
+  end if;
 
   insert into profiles(id, full_name, email, role, organization_id, store_id)
   values (
