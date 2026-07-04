@@ -21,7 +21,7 @@ class PosScreen extends ConsumerWidget {
     final productsAsync = ref.watch(productsProvider);
     final pos = ref.watch(posProvider);
     final shift = ref.watch(shiftProvider).valueOrNull;
-    final currency = CurrencyFormatter(currencyCode: 'USD');
+    final currency = CurrencyFormatter(currencyCode: 'LKR');
     final draft = SaleDraft(
       storeId: 0,
       shiftId: shift?.id ?? 0,

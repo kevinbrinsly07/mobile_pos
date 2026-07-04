@@ -30,4 +30,15 @@ class AppUser {
       storeId: map['store_id'] as int? ?? 0,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'email': email,
+      'full_name': fullName,
+      'role': role.name,
+      'organization_id': organizationId,
+      'store_id': storeId,
+    };
+  }
 }

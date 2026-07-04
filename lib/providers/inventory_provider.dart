@@ -13,5 +13,17 @@ final productsProvider = FutureProvider<List<Product>>((ref) async {
   if (user == null) {
     return <Product>[];
   }
-  return ref.read(inventoryServiceProvider).products(storeId: user.storeId);
+  final cache = ref.read(localCacheServiceProvider);
+  try {
+    final products = await ref.read(inventoryServiceProvider).products(storeId: user.storeId);
+    await cache.saveProducts(user.storeId, products);
+    return products;
+  } catch (e) {
+    // Offline fallback for products catalog
+    final cached = cache.getProducts(user.storeId);
+    if (cached.isNotEmpty) {
+      return cached;
+    }
+    rethrow;
+  }
 });

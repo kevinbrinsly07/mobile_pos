@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/auth_provider.dart';
+import '../utils/error_handler.dart';
+
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -82,9 +84,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: Text(_signupMode ? 'I have an account' : 'Create a new account'),
                   ),
                   if (auth.hasError)
-                    Text(
-                      '${auth.error}',
-                      style: const TextStyle(color: Colors.red),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        ErrorHandler.getDisplayMessage(auth.error),
+                        style: const TextStyle(color: Colors.red, fontSize: 13),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                 ],
               ),

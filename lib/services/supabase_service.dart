@@ -11,9 +11,10 @@ class SupabaseService {
     if (_initialized) {
       return;
     }
-    final targetUrl = url ?? (AppConfig.isConfigured ? AppConfig.supabaseUrl : null);
-    final targetKey = anonKey ?? (AppConfig.isConfigured ? AppConfig.supabaseAnonKey : null);
-    if (targetUrl == null || targetKey == null) {
+    final targetUrl = AppConfig.isConfigured ? AppConfig.supabaseUrl : url;
+    final targetKey = AppConfig.isConfigured ? AppConfig.supabaseAnonKey : anonKey;
+
+    if (targetUrl == null || targetUrl.isEmpty || targetKey == null || targetKey.isEmpty) {
       return;
     }
     await Supabase.initialize(
