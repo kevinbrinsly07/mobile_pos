@@ -40,21 +40,33 @@ class CartPanel extends StatelessWidget {
                 return ListTile(
                   title: Text(item.product.name),
                   subtitle: Text(currencyFormatter.cents(item.totalCents)),
-                  trailing: Wrap(
-                    spacing: 6,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(),
                         onPressed: () => onDecrement(item),
-                        icon: const Icon(Icons.remove_circle_outline),
+                        icon: const Icon(Icons.remove_circle_outline, size: 20),
                       ),
-                      Text('${item.quantity}'),
+                      const SizedBox(width: 8),
+                      Text(
+                        '${item.quantity}',
+                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(width: 8),
                       IconButton(
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(),
                         onPressed: () => onIncrement(item),
-                        icon: const Icon(Icons.add_circle_outline),
+                        icon: const Icon(Icons.add_circle_outline, size: 20),
                       ),
+                      const SizedBox(width: 12),
                       IconButton(
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(),
                         onPressed: () => onRemove(item),
-                        icon: const Icon(Icons.delete_outline),
+                        icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
                       ),
                     ],
                   ),

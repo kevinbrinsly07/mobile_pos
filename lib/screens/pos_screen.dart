@@ -32,6 +32,56 @@ class PosScreen extends ConsumerWidget {
       amountTenderedCents: pos.amountTenderedCents,
     );
 
+    final isCompact = MediaQuery.of(context).size.width < 800;
+
+    final productGridWidget = productsAsync.when(
+      data: (products) => Padding(
+        padding: const EdgeInsets.all(12),
+        child: ProductGrid(
+          products: products,
+          currencyFormatter: currency,
+          onTap: (product) => ref
+              .read(posProvider.notifier)
+              .addItem(CartItem(product: product)),
+        ),
+      ),
+      loading: () => const LoadingState(),
+      error: (error, _) => Center(child: Text('Error: $error')),
+    );
+
+    final cartPanelWidget = CartPanel(
+      items: pos.items,
+      currencyFormatter: currency,
+      onIncrement: (item) => ref
+          .read(posProvider.notifier)
+          .updateQuantity(item, item.quantity + 1),
+      onDecrement: (item) => ref
+          .read(posProvider.notifier)
+          .updateQuantity(item, item.quantity - 1),
+      onRemove: (item) => ref.read(posProvider.notifier).removeItem(item),
+      totalCents: draft.totalCents,
+      onCheckout: shift == null
+          ? () {}
+          : () async {
+              final payment = await showModalBottomSheet<SplitPayment>(
+                context: context,
+                isScrollControlled: true,
+                builder: (_) => PaymentSheet(totalCents: draft.totalCents),
+              );
+              if (payment != null) {
+                ref.read(posProvider.notifier).addPayment(payment);
+                ref.read(posProvider.notifier).setAmountTendered(
+                      payment.method == PaymentMethod.cash
+                          ? payment.amountCents
+                          : draft.totalCents,
+                    );
+                await ref
+                    .read(posProvider.notifier)
+                    .checkout(shiftId: shift.id);
+              }
+            },
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Checkout'),
@@ -69,62 +119,31 @@ class PosScreen extends ConsumerWidget {
           if (shift == null)
             const StatusBanner(text: 'No open shift. Go to Shifts and open till first.'),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: productsAsync.when(
-                    data: (products) => Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: ProductGrid(
-                        products: products,
-                        currencyFormatter: currency,
-                        onTap: (product) => ref
-                            .read(posProvider.notifier)
-                            .addItem(CartItem(product: product)),
+            child: isCompact
+                ? Column(
+                    children: [
+                      Expanded(
+                        child: productGridWidget,
                       ),
-                    ),
-                    loading: () => const LoadingState(),
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                      const Divider(height: 1),
+                      SizedBox(
+                        height: 300,
+                        child: cartPanelWidget,
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: productGridWidget,
+                      ),
+                      SizedBox(
+                        width: 400,
+                        child: cartPanelWidget,
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  width: 400,
-                  child: CartPanel(
-                    items: pos.items,
-                    currencyFormatter: currency,
-                    onIncrement: (item) => ref
-                        .read(posProvider.notifier)
-                        .updateQuantity(item, item.quantity + 1),
-                    onDecrement: (item) => ref
-                        .read(posProvider.notifier)
-                        .updateQuantity(item, item.quantity - 1),
-                    onRemove: (item) => ref.read(posProvider.notifier).removeItem(item),
-                    totalCents: draft.totalCents,
-                    onCheckout: shift == null
-                        ? () {}
-                        : () async {
-                            final payment = await showModalBottomSheet<SplitPayment>(
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (_) => PaymentSheet(totalCents: draft.totalCents),
-                            );
-                            if (payment != null) {
-                              ref.read(posProvider.notifier).addPayment(payment);
-                              ref.read(posProvider.notifier).setAmountTendered(
-                                    payment.method == PaymentMethod.cash
-                                        ? payment.amountCents
-                                        : draft.totalCents,
-                                  );
-                              await ref
-                                  .read(posProvider.notifier)
-                                  .checkout(shiftId: shift.id);
-                            }
-                          },
-                  ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
