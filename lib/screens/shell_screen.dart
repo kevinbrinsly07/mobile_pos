@@ -223,7 +223,7 @@ class ShellScreen extends ConsumerWidget {
       ),
       bottomNavigationBar: isCompact
           ? Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12, bottom: 16),
+              padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8, top: 12),
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
