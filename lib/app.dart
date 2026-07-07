@@ -28,8 +28,100 @@ class PosApp extends ConsumerWidget {
       title: 'Modern POS',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0E7A6A)),
         useMaterial3: true,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF0B0F19),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFF00E676),
+          onPrimary: Color(0xFF0B0F19),
+          secondary: Color(0xFF09DE99),
+          onSecondary: Colors.white,
+          surface: Color(0xFF161C2A),
+          onSurface: Colors.white,
+          error: Color(0xFFFF5252),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF0B0F19),
+          elevation: 0,
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        cardTheme: CardThemeData(
+          color: const Color(0xFF161C2A),
+          elevation: 4,
+          shadowColor: Colors.black.withOpacity(0.4),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: const BorderSide(color: Color(0xFF26324D), width: 1),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: const Color(0xFF1C2538),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Color(0xFF26324D)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Color(0xFF26324D)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Color(0xFF00E676), width: 2),
+          ),
+          labelStyle: const TextStyle(color: Colors.white70),
+          floatingLabelStyle: const TextStyle(color: Color(0xFF00E676)),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: const Color(0xFF00E676),
+            foregroundColor: const Color(0xFF0B0F19),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: const Color(0xFF00E676),
+            textStyle: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: const Color(0xFF101524),
+          indicatorColor: const Color(0xFF00E676).withOpacity(0.15),
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(inherit: false, color: Color(0xFF00E676), fontSize: 12, fontWeight: FontWeight.bold);
+            }
+            return const TextStyle(inherit: false, color: Colors.white60, fontSize: 12);
+          }),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const IconThemeData(color: Color(0xFF00E676), size: 24);
+            }
+            return const IconThemeData(color: Colors.white60, size: 24);
+          }),
+        ),
+        navigationRailTheme: NavigationRailThemeData(
+          backgroundColor: const Color(0xFF101524),
+          indicatorColor: const Color(0xFF00E676).withOpacity(0.15),
+          labelType: NavigationRailLabelType.all,
+          selectedLabelTextStyle: const TextStyle(inherit: false, color: Color(0xFF00E676), fontSize: 12, fontWeight: FontWeight.bold),
+          unselectedLabelTextStyle: const TextStyle(inherit: false, color: Colors.white60, fontSize: 12),
+          selectedIconTheme: const IconThemeData(color: Color(0xFF00E676), size: 26),
+          unselectedIconTheme: const IconThemeData(color: Colors.white60, size: 24),
+        ),
       ),
       routerConfig: router,
     );

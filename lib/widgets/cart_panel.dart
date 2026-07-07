@@ -26,67 +26,108 @@ class CartPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7FBF9),
-        border: Border(left: BorderSide(color: Colors.grey.shade300)),
+      decoration: const BoxDecoration(
+        color: Color(0xFF101524),
+        border: Border(
+          left: BorderSide(color: Color(0xFF26324D), width: 1),
+          top: BorderSide(color: Color(0xFF26324D), width: 1),
+        ),
       ),
       child: Column(
         children: [
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 12),
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-                return ListTile(
-                  title: Text(item.product.name),
-                  subtitle: Text(currencyFormatter.cents(item.totalCents)),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(),
-                        onPressed: () => onDecrement(item),
-                        icon: const Icon(Icons.remove_circle_outline, size: 20),
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C2538),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFF26324D), width: 1),
+                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    title: Text(
+                      item.product.name,
+                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Colors.white),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        currencyFormatter.cents(item.totalCents),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF00E676)),
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '${item.quantity}',
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(width: 8),
-                      IconButton(
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(),
-                        onPressed: () => onIncrement(item),
-                        icon: const Icon(Icons.add_circle_outline, size: 20),
-                      ),
-                      const SizedBox(width: 12),
-                      IconButton(
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(),
-                        onPressed: () => onRemove(item),
-                        icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
-                      ),
-                    ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          onPressed: () => onDecrement(item),
+                          icon: const Icon(Icons.remove_rounded, color: Colors.white70, size: 20),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            '${item.quantity}',
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                        ),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          onPressed: () => onIncrement(item),
+                          icon: const Icon(Icons.add_rounded, color: Color(0xFF00E676), size: 20),
+                        ),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          onPressed: () => onRemove(item),
+                          icon: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 20),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
+              color: Color(0xFF161C2A),
+              border: Border(
+                top: BorderSide(color: Color(0xFF26324D), width: 1),
+              ),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Total: ${currencyFormatter.cents(totalCents)}',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Total Amount',
+                      style: TextStyle(fontSize: 14, color: Colors.white70),
+                    ),
+                    Text(
+                      currencyFormatter.cents(totalCents),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF00E676)),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                FilledButton(
-                  onPressed: items.isEmpty ? null : onCheckout,
-                  child: const Text('Charge'),
+                const SizedBox(height: 16),
+                SizedBox(
+                  height: 52,
+                  child: FilledButton(
+                    onPressed: items.isEmpty ? null : onCheckout,
+                    child: const Text('Charge'),
+                  ),
                 ),
               ],
             ),
