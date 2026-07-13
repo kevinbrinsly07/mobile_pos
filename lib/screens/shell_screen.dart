@@ -28,7 +28,7 @@ class ShellScreen extends ConsumerWidget {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF101524),
+      backgroundColor: const Color(0xFF000000),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -74,7 +74,7 @@ class ShellScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                const Divider(color: Color(0xFF26324D)),
+                const Divider(color: Color(0xFF212529)),
                 const SizedBox(height: 16),
                 GridView.builder(
                   shrinkWrap: true,
@@ -99,10 +99,10 @@ class ShellScreen extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color(0xFF161C2A),
+                          color: const Color(0xFF212529),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: const Color(0xFF26324D),
+                            color: const Color(0xFFf77f00),
                             width: 1,
                           ),
                         ),
@@ -111,7 +111,7 @@ class ShellScreen extends ConsumerWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(tab.icon, size: 28, color: const Color(0xFF00E676)),
+                              Icon(tab.icon, size: 28, color: const Color(0xFFf77f00)),
                               const SizedBox(height: 8),
                               Text(
                                 tab.label,
@@ -177,10 +177,10 @@ class ShellScreen extends ConsumerWidget {
             Container(
               margin: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFF101524),
+                color: const Color(0xFF000000),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: const Color(0xFF26324D),
+                  color: const Color(0xFF000000),
                   width: 1,
                 ),
               ),

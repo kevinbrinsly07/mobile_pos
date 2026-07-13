@@ -37,9 +37,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF070B11),
-              Color(0xFF0E1A17),
-              Color(0xFF070B11),
+              Color(0xFF000000),
+              Color(0xFF212529),
+              Color(0xFF000000),
             ],
           ),
         ),
@@ -52,7 +52,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: const Color(0xFF26324D).withOpacity(0.5),
+                    color: const Color(0xFF000000).withOpacity(0.5),
                     width: 1.5,
                   ),
                 ),
@@ -61,7 +61,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      color: const Color(0xFF121824).withOpacity(0.8),
+                      color: const Color(0xFF000000).withOpacity(0.8),
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -69,13 +69,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF00E676).withOpacity(0.12),
+                              color: const Color(0xFFf77f00).withOpacity(0.12),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
                               Icons.point_of_sale_rounded,
                               size: 36,
-                              color: Color(0xFF00E676),
+                              color: Color(0xFFf77f00),
                             ),
                           ),
                           const SizedBox(height: 16),

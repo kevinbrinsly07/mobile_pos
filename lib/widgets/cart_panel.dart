@@ -27,10 +27,10 @@ class CartPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF101524),
+        color: Color(0xFF000000),
         border: Border(
-          left: BorderSide(color: Color(0xFF26324D), width: 1),
-          top: BorderSide(color: Color(0xFF26324D), width: 1),
+          left: BorderSide(color: Color(0xFF212529), width: 1),
+          top: BorderSide(color: Color(0xFF212529), width: 1),
         ),
       ),
       child: Column(
@@ -44,9 +44,9 @@ class CartPanel extends StatelessWidget {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1C2538),
+                    color: const Color(0xFF212529),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF26324D), width: 1),
+                    border: Border.all(color: const Color(0xFF212529), width: 1),
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -58,7 +58,7 @@ class CartPanel extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
                         currencyFormatter.cents(item.totalCents),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF00E676)),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFFf77f00)),
                       ),
                     ),
                     trailing: Row(
@@ -81,7 +81,7 @@ class CartPanel extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
                           onPressed: () => onIncrement(item),
-                          icon: const Icon(Icons.add_rounded, color: Color(0xFF00E676), size: 20),
+                          icon: const Icon(Icons.add_rounded, color: Color(0xFFf77f00), size: 20),
                         ),
                         const SizedBox(width: 8),
                         IconButton(
@@ -100,9 +100,9 @@ class CartPanel extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
-              color: Color(0xFF161C2A),
+              color: Color(0xFF000000),
               border: Border(
-                top: BorderSide(color: Color(0xFF26324D), width: 1),
+                top: BorderSide(color: Color(0xFF000000), width: 1),
               ),
             ),
             child: Column(
@@ -117,7 +117,7 @@ class CartPanel extends StatelessWidget {
                     ),
                     Text(
                       currencyFormatter.cents(totalCents),
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF00E676)),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFf77f00)),
                     ),
                   ],
                 ),
