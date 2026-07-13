@@ -84,66 +84,98 @@ class PosScreen extends ConsumerWidget {
             },
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Checkout'),
-        actions: [
-          IconButton(
-            tooltip: 'Scan barcode',
-            icon: const Icon(Icons.qr_code_scanner),
-            onPressed: () {
-              showModalBottomSheet<void>(
-                context: context,
-                builder: (_) => SizedBox(
-                  height: 360,
-                  child: MobileScanner(
-                    onDetect: (capture) {
-                      final barcode = capture.barcodes.first.rawValue;
-                      if (barcode == null) {
-                        return;
-                      }
-                      final products = productsAsync.valueOrNull ?? [];
-                      final match = products
-                          .where((p) => p.barcode == barcode)
-                          .firstOrNull;
-                      if (match != null) {
-                        ref
-                            .read(posProvider.notifier)
-                            .addItem(CartItem(product: match));
-                        Navigator.of(context).pop();
-                      }
-                    },
-                  ),
+    final appBar = AppBar(
+      title: const Text('Checkout'),
+      bottom: isCompact
+          ? TabBar(
+              indicatorColor: const Color(0xFFf77f00),
+              labelColor: const Color(0xFFf77f00),
+              unselectedLabelColor: Colors.white60,
+              tabs: [
+                const Tab(
+                  icon: Icon(Icons.grid_view),
+                  text: 'Products',
                 ),
-              );
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          if (shift == null)
-            const StatusBanner(
-              text: 'No open shift. Go to Shifts and open till first.',
-            ),
-          Expanded(
-            child: isCompact
-                ? Column(
-                    children: [
-                      Expanded(child: productGridWidget),
-                      const Divider(height: 1, color: Color(0xFFf77f00)),
-                      SizedBox(height: 300, child: cartPanelWidget),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      Expanded(flex: 3, child: productGridWidget),
-                      SizedBox(width: 400, child: cartPanelWidget),
-                    ],
+                Tab(
+                  icon: Badge.count(
+                    count: pos.items.fold(0, (sum, item) => sum + item.quantity),
+                    isLabelVisible: pos.items.isNotEmpty,
+                    child: const Icon(Icons.shopping_cart),
                   ),
-          ),
-        ],
-      ),
+                  text: 'Cart',
+                ),
+              ],
+            )
+          : null,
+      actions: [
+        IconButton(
+          tooltip: 'Scan barcode',
+          icon: const Icon(Icons.qr_code_scanner),
+          onPressed: () {
+            showModalBottomSheet<void>(
+              context: context,
+              builder: (_) => SizedBox(
+                height: 360,
+                child: MobileScanner(
+                  onDetect: (capture) {
+                    final barcode = capture.barcodes.first.rawValue;
+                    if (barcode == null) {
+                      return;
+                    }
+                    final products = productsAsync.valueOrNull ?? [];
+                    final match = products.where((p) => p.barcode == barcode).firstOrNull;
+                    if (match != null) {
+                      ref.read(posProvider.notifier).addItem(CartItem(product: match));
+                      Navigator.of(context).pop();
+                    }
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
+
+    final body = Column(
+      children: [
+        if (shift == null)
+          const StatusBanner(
+            text: 'No open shift. Go to Shifts and open till first.',
+          ),
+        Expanded(
+          child: isCompact
+              ? TabBarView(
+                  children: [
+                    productGridWidget,
+                    cartPanelWidget,
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(flex: 3, child: productGridWidget),
+                    SizedBox(
+                      width: 400,
+                      child: cartPanelWidget,
+                    ),
+                  ],
+                ),
+        ),
+      ],
+    );
+
+    final scaffold = Scaffold(
+      appBar: appBar,
+      body: body,
+    );
+
+    if (isCompact) {
+      return DefaultTabController(
+        length: 2,
+        child: scaffold,
+      );
+    } else {
+      return scaffold;
+    }
   }
 }

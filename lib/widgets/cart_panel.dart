@@ -25,12 +25,16 @@ class CartPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCompact = MediaQuery.of(context).size.width < 800;
+
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFF000000),
+      decoration: BoxDecoration(
+        color: const Color(0xFF000000),
         border: Border(
-          left: BorderSide(color: Color(0xFF212529), width: 1),
-          top: BorderSide(color: Color(0xFF212529), width: 1),
+          left: isCompact
+              ? BorderSide.none
+              : const BorderSide(color: Color(0xFF212529), width: 1),
+          top: const BorderSide(color: Color(0xFF212529), width: 1),
         ),
       ),
       child: Column(
@@ -42,23 +46,23 @@ class CartPanel extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = items[index];
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0c0f0a),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: const Color(0xFF212529), width: 1),
                   ),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                     title: Text(
                       item.product.name,
-                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Colors.white),
+                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Colors.white),
                     ),
                     subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 4),
+                      padding: const EdgeInsets.only(top: 2),
                       child: Text(
                         currencyFormatter.cents(item.totalCents),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFFf77f00)),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Color(0xFFf77f00)),
                       ),
                     ),
                     trailing: Row(
@@ -68,27 +72,27 @@ class CartPanel extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
                           onPressed: () => onDecrement(item),
-                          icon: const Icon(Icons.remove_rounded, color: Colors.white70, size: 20),
+                          icon: const Icon(Icons.remove_rounded, color: Colors.white70, size: 18),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Text(
                             '${item.quantity}',
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
                           ),
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
                           onPressed: () => onIncrement(item),
-                          icon: const Icon(Icons.add_rounded, color: Color(0xFFf77f00), size: 20),
+                          icon: const Icon(Icons.add_rounded, color: Color(0xFFf77f00), size: 18),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 6),
                         IconButton(
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
                           onPressed: () => onRemove(item),
-                          icon: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 20),
+                          icon: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 18),
                         ),
                       ],
                     ),
@@ -98,7 +102,7 @@ class CartPanel extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: const BoxDecoration(
               color: Color(0xFF000000),
               border: Border(
@@ -113,18 +117,21 @@ class CartPanel extends StatelessWidget {
                   children: [
                     const Text(
                       'Total Amount',
-                      style: TextStyle(fontSize: 14, color: Colors.white70),
+                      style: TextStyle(fontSize: 12, color: Colors.white70),
                     ),
                     Text(
                       currencyFormatter.cents(totalCents),
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFf77f00)),
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFf77f00)),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 10),
                 SizedBox(
-                  height: 52,
+                  height: 40,
                   child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
                     onPressed: items.isEmpty ? null : onCheckout,
                     child: const Text('Charge'),
                   ),
