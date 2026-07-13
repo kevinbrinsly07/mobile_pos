@@ -30,7 +30,7 @@ class PosApp extends ConsumerWidget {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0B0F19),
+        scaffoldBackgroundColor: const Color(0xFF000000),
         colorScheme: const ColorScheme.dark(
           primary: Color(0xFFf77f00),
           onPrimary: Color(0xFF000000),

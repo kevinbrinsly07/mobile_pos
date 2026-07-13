@@ -44,7 +44,7 @@ class CartPanel extends StatelessWidget {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF212529),
+                    color: const Color(0xFF0c0f0a),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: const Color(0xFF212529), width: 1),
                   ),

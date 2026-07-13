@@ -33,9 +33,9 @@ class ProductGrid extends StatelessWidget {
 
         return Container(
           decoration: BoxDecoration(
-            color: const Color(0xFF161C2A),
+            color: const Color(0xFF0c0f0a),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF26324D), width: 1.2),
+            border: Border.all(color: const Color(0xFF000000), width: 1.2),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
@@ -49,8 +49,8 @@ class ProductGrid extends StatelessWidget {
             child: InkWell(
               onTap: () => onTap(product),
               borderRadius: BorderRadius.circular(16),
-              splashColor: const Color(0xFF00E676).withOpacity(0.1),
-              highlightColor: const Color(0xFF00E676).withOpacity(0.05),
+              splashColor: const Color(0xFFf77f00).withOpacity(0.1),
+              highlightColor: const Color(0xFFf77f00).withOpacity(0.05),
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Column(
@@ -65,7 +65,7 @@ class ProductGrid extends StatelessWidget {
                           height: 36,
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Color(0xFF09DE99), Color(0xFF00E676)],
+                              colors: [Color(0xFFf77f00), Color(0xFFf77f00)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -117,7 +117,7 @@ class ProductGrid extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF00E676),
+                        color: Color(0xFFf77f00),
                       ),
                     ),
                   ],
