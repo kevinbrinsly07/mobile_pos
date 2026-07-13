@@ -52,25 +52,25 @@ class PosApp extends ConsumerWidget {
           iconTheme: IconThemeData(color: Colors.white),
         ),
         cardTheme: CardThemeData(
-          color: const Color(0xFF161C2A),
+          color: const Color(0xFF0c0f0a),
           elevation: 4,
           shadowColor: Colors.black.withOpacity(0.4),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: const BorderSide(color: Color(0xFF26324D), width: 1),
+            side: const BorderSide(color: Color(0xFFf77f00), width: 1),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFF1C2538),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          fillColor: const Color(0xFF0c0f0a),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF1C2538)),
+            borderSide: const BorderSide(color: Color(0xFFf77f00)),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF1C2538)),
+            borderSide: const BorderSide(color: Color(0xFFf77f00)),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
