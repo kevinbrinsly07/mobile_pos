@@ -70,7 +70,9 @@ class PosScreen extends ConsumerWidget {
               );
               if (payment != null) {
                 ref.read(posProvider.notifier).addPayment(payment);
-                ref.read(posProvider.notifier).setAmountTendered(
+                ref
+                    .read(posProvider.notifier)
+                    .setAmountTendered(
                       payment.method == PaymentMethod.cash
                           ? payment.amountCents
                           : draft.totalCents,
@@ -101,9 +103,13 @@ class PosScreen extends ConsumerWidget {
                         return;
                       }
                       final products = productsAsync.valueOrNull ?? [];
-                      final match = products.where((p) => p.barcode == barcode).firstOrNull;
+                      final match = products
+                          .where((p) => p.barcode == barcode)
+                          .firstOrNull;
                       if (match != null) {
-                        ref.read(posProvider.notifier).addItem(CartItem(product: match));
+                        ref
+                            .read(posProvider.notifier)
+                            .addItem(CartItem(product: match));
                         Navigator.of(context).pop();
                       }
                     },
@@ -117,31 +123,22 @@ class PosScreen extends ConsumerWidget {
       body: Column(
         children: [
           if (shift == null)
-            const StatusBanner(text: 'No open shift. Go to Shifts and open till first.'),
+            const StatusBanner(
+              text: 'No open shift. Go to Shifts and open till first.',
+            ),
           Expanded(
             child: isCompact
                 ? Column(
                     children: [
-                      Expanded(
-                        child: productGridWidget,
-                      ),
-                      const Divider(height: 1),
-                      SizedBox(
-                        height: 300,
-                        child: cartPanelWidget,
-                      ),
+                      Expanded(child: productGridWidget),
+                      const Divider(height: 1, color: Color(0xFFf77f00)),
+                      SizedBox(height: 300, child: cartPanelWidget),
                     ],
                   )
                 : Row(
                     children: [
-                      Expanded(
-                        flex: 3,
-                        child: productGridWidget,
-                      ),
-                      SizedBox(
-                        width: 400,
-                        child: cartPanelWidget,
-                      ),
+                      Expanded(flex: 3, child: productGridWidget),
+                      SizedBox(width: 400, child: cartPanelWidget),
                     ],
                   ),
           ),

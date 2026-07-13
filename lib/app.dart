@@ -34,7 +34,7 @@ class PosApp extends ConsumerWidget {
         colorScheme: const ColorScheme.dark(
           primary: Color(0xFFf77f00),
           onPrimary: Color(0xFF000000),
-          secondary: Color(0xFFfcbf49),
+          secondary: Color(0xFFf77f00),
           onSecondary: Colors.white,
           surface: Color(0xFF000000),
           onSurface: Colors.white,
@@ -66,11 +66,11 @@ class PosApp extends ConsumerWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF26324D)),
+            borderSide: const BorderSide(color: Color(0xFF1C2538)),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF26324D)),
+            borderSide: const BorderSide(color: Color(0xFF1C2538)),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
