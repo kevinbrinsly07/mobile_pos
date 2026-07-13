@@ -25,7 +25,7 @@ class PosApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
-      title: 'Modern POS',
+      title: 'CashierLK',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
