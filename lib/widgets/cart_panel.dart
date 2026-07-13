@@ -102,7 +102,7 @@ class CartPanel extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Color(0xFF000000),
               border: Border(
-                top: BorderSide(color: Color(0xFF000000), width: 1),
+                top: BorderSide(color: Color(0xFFf77f00), width: 1),
               ),
             ),
             child: Column(

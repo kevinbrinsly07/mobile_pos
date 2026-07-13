@@ -41,7 +41,7 @@ class PosApp extends ConsumerWidget {
           error: Color(0xFFFF5252),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF0B0F19),
+          backgroundColor: Color(0xFF000000),
           elevation: 0,
           centerTitle: true,
           titleTextStyle: TextStyle(
