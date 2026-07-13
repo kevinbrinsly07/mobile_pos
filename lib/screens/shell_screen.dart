@@ -218,12 +218,7 @@ class ShellScreen extends ConsumerWidget {
                 ),
               ),
             ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: isCompact ? 100 : 0),
-              child: child,
-            ),
-          ),
+          Expanded(child: child),
         ],
       ),
       bottomNavigationBar: isCompact
