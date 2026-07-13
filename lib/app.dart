@@ -36,7 +36,7 @@ class PosApp extends ConsumerWidget {
           onPrimary: Color(0xFF0B0F19),
           secondary: Color(0xFF09DE99),
           onSecondary: Colors.white,
-          surface: Color(0xFF161C2A),
+          surface: Color(0xFF000000),
           onSurface: Colors.white,
           error: Color(0xFFFF5252),
         ),
@@ -97,7 +97,7 @@ class PosApp extends ConsumerWidget {
           ),
         ),
         navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: const Color(0xFF101524),
+          backgroundColor: const Color(0xFF000000),
           indicatorColor: const Color(0xFF00E676).withOpacity(0.15),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           labelTextStyle: WidgetStateProperty.resolveWith((states) {

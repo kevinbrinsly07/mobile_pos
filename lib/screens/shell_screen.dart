@@ -228,8 +228,8 @@ class ShellScreen extends ConsumerWidget {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.4),
-                      blurRadius: 16,
+                      color: Colors.black,
+                      blurRadius: 36,
                       offset: const Offset(0, 8),
                     ),
                   ],
