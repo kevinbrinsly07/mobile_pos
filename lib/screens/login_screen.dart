@@ -38,7 +38,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             end: Alignment.bottomRight,
             colors: [
               Color(0xFF000000),
-              Color(0xFF212529),
+              Color(0xFF000000),
               Color(0xFF000000),
             ],
           ),
@@ -69,7 +69,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFf77f00).withOpacity(0.12),
+                              color: const Color(0xFF000000).withOpacity(0.12),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
